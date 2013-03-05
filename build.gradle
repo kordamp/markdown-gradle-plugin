@@ -1,0 +1,80 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+configurations {
+    deployerJars
+}
+
+repositories {
+    mavenCentral()
+    mavenRepo(name: 'bintray-kordamp', url: 'http://dl.bintray.com/content/aalmiray/kordamp')
+}
+
+dependencies {
+    deployerJars 'org.apache.maven.wagon:wagon-webdav:1.0-beta-2',
+            'org.apache.maven:maven-ant-tasks:2.1.0'
+
+    compile gradleApi()
+    compile 'com.overzealous:remark:0.9.3',
+            'org.jsoup:jsoup:1.7.2',
+            'org.apache.commons:commons-lang3:3.1',
+            'org.pegdown:pegdown:1.2.1'
+
+    testCompile 'org.spockframework:spock-core:0.6-groovy-1.8'
+}
+
+task wrapper(type: Wrapper, description: 'Gradle Wrapper task') {
+    gradleVersion = '1.4'
+}
+
+def installer = install.repositories.mavenInstaller
+def deployer = null
+
+if(!project.hasProperty('bintrayUsername')) ext.bintrayUsername = ''
+if(!project.hasProperty('bintrayPassword')) ext.bintrayPassword = ''
+
+uploadArchives {
+    repositories {
+        deployer = mavenDeployer {
+            name = 'bintrayDeployer'
+            configuration = configurations.deployerJars
+            repository(url: bintrayReleaseUrl) {
+                authentication(userName: bintrayUsername, password: bintrayPassword)
+            }
+        }
+    }
+}
+
+[installer, deployer].each { repo ->
+    configure(repo) {
+        pom.project {
+            name('gradle-markdown-plugin')
+            description('A Gradle plugin for transforming Markdown to HTML and back again')
+            url('https://github.com/aalmiray/gradle-markdown-plugin')
+            inceptionYear '2013'
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                url "https://github.com/aalmiray/gradle-markdown-plugin"
+            }
+            developers {
+                [aalmiray: 'Andres Almiray',
+                 tednaleid: 'Ted Naleid'].each { devId, devName ->
+                    developer {
+                        id devId
+                        name devName
+                        roles {
+                            role 'Developer'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
