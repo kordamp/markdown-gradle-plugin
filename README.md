@@ -1,3 +1,8 @@
+Markdown Gradle Plugin
+-------------------------
+
+[![Travis Build Status](https://travis-ci.org/aalmiray/markdown-gradle-plugin.png?branch=master)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
+
 This plugin provides a facility for converting markdown into HTML, as well as
 converting HTML back into markdown. This plugin is inspired in [grails-markdown][]
 plugin by Ted Naleid.
