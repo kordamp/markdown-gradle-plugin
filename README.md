@@ -4,7 +4,7 @@ Markdown Gradle Plugin
 [![Travis Build Status](https://travis-ci.org/aalmiray/markdown-gradle-plugin.png?branch=master)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
 
 This plugin provides a facility for converting markdown into HTML, as well as
-converting HTML back into markdown. This plugin is inspired in [grails-markdown][]
+converting HTML back into markdown. It is based on the [grails-markdown][]
 plugin by Ted Naleid.
 
 See [Daring Fireball][] for syntax basics.
@@ -18,8 +18,8 @@ Use the following snippet
 
     buildscript {
         repositories {
-            mavenRepo name: 'Bintray', url: 'http://dl.bintray.com/content/aalmiray/kordamp'
             mavenCentral()
+            mavenRepo name: 'Bintray', url: 'http://dl.bintray.com/content/aalmiray/kordamp'
         }
         dependencies {
             classpath 'org.kordamp:markdown-gradle-plugin:0.1'
@@ -45,6 +45,8 @@ Sources may have any of the following extensions in order to be discovered
  * .md
  * .markdown
 
+Non markdown files will be copied "as is" to `outputDir`.
+
 #### htmlToMarkdown
 
  * source - where the html sources are. Type: File. Default: `src/html`.
@@ -54,6 +56,8 @@ Sources may have any of the following extensions in order to be discovered
 Sources may have any of the following extensions in order to be discovered
 
  * .html
+
+Non html files will be copied "as is" to `outputDir`.
 
 ## Configuration ##
 
