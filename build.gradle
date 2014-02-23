@@ -135,6 +135,6 @@ bintray {
         name = 'markdown-gradle-plugin'
         desc = 'A Gradle plugin for transforming Markdown to HTML and back again'
         licenses = ['Apache-2.0']
-        labels = ['gradle', 'plugin', 'Markdown']
+        labels = ['gradle', 'plugin', 'markdown']
     }
 }
