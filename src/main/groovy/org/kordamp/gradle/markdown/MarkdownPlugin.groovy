@@ -22,15 +22,17 @@ import org.gradle.api.Project
  * @author Andres Almiray
  */
 class MarkdownPlugin implements Plugin<Project> {
+    private static final String DOCUMENTATION = 'Documentation'
+
     void apply(Project project) {
         project.task('markdownToHtml',
             type: MarkdownToHtmlTask,
-            group: 'Documentation',
+            group: DOCUMENTATION,
             description: 'Converts Markdown sources into HTML')
 
         project.task('htmlToMarkdown',
             type: HtmlToMarkdownTask,
-            group: 'Documentation',
+            group: DOCUMENTATION,
             description: 'Converts HTML into Markdown')
     }
 }

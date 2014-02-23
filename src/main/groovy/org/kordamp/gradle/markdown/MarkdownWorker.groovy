@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 package org.kordamp.gradle.markdown
-
-import org.gradle.api.file.FileTree
-
 /**
  * @author Andres Almiray
  */

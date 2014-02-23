@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 package org.kordamp.gradle.markdown
-
-import org.apache.commons.io.FileUtils
-
 /**
  * @author Andres Almiray
  */
@@ -59,16 +56,16 @@ class MarkdownWorkerImpl implements MarkdownWorker {
      */
     private static String stripFilenameExtension(String path) {
         if (path == null) {
-            return null;
+            return null
         }
-        int extIndex = path.lastIndexOf(".");
+        int extIndex = path.lastIndexOf('.')
         if (extIndex == -1) {
-            return path;
+            return path
         }
-        int folderIndex = path.lastIndexOf("/");
+        int folderIndex = path.lastIndexOf('/')
         if (folderIndex > extIndex) {
-            return path;
+            return path
         }
-        return path.substring(0, extIndex);
+        path[0..<extIndex]
     }
 }

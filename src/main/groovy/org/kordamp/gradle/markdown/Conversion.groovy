@@ -19,16 +19,20 @@ package org.kordamp.gradle.markdown
  * @author Andres Almiray
  */
 enum Conversion {
-    MARKDOWN('markdownToHtml', ['.md', '.markdown'], '.html'),
-    HTML('htmlToMarkdown', ['.html'], '.md');
+    MARKDOWN('markdownToHtml', [MD_EXTENSION, MARKDOWN_EXTENSION], HTML_EXTENSION),
+    HTML('htmlToMarkdown', [HTML_EXTENSION], MD_EXTENSION)
 
-    private final String methodName;
-    private final List<String> extensions = [];
-    private final String targetExtension;
+    private static final String MD_EXTENSION = '.md'
+    private static final String HTML_EXTENSION = '.html'
+    private static final String MARKDOWN_EXTENSION = '.markdown'
+
+    private final String methodName
+    private final List<String> extensions = []
+    private final String targetExtension
     private final MarkdownProcessor processor = new MarkdownProcessor()
 
     Conversion(String methodName, List<String> extensions, String targetExtension) {
-        this.methodName = methodName;
+        this.methodName = methodName
         this.extensions.addAll(extensions)
         this.targetExtension = targetExtension
     }
@@ -37,9 +41,10 @@ enum Conversion {
         for (String ext : extensions) {
             if (file.name.endsWith(ext)) return true
         }
-        return false
+        false
     }
 
+    @SuppressWarnings('ConfusingMethodName')
     String targetExtension() {
         targetExtension
     }
@@ -48,7 +53,8 @@ enum Conversion {
 //        extensions.collect([]) { '**/*' + it }.join(', ')
 //    }
 
-    String convert(File file, Map configuration){//, String basedir, File outputDir) {
+    String convert(File file, Map configuration) {
+//, String basedir, File outputDir) {
         processor."$methodName"(file.text, configuration)
         /*
         String relativeFilePath = file.parentFile.absolutePath - basedir
@@ -67,18 +73,18 @@ enum Conversion {
      * @return the path with stripped filename extension,
      *         or <code>null</code> if none
      */
-    public static String stripFilenameExtension(String path) {
+    static String stripFilenameExtension(String path) {
         if (path == null) {
-            return null;
+            return null
         }
-        int extIndex = path.lastIndexOf(".");
+        int extIndex = path.lastIndexOf('.')
         if (extIndex == -1) {
-            return path;
+            return path
         }
-        int folderIndex = path.lastIndexOf("/");
+        int folderIndex = path.lastIndexOf('/')
         if (folderIndex > extIndex) {
-            return path;
+            return path
         }
-        return path.substring(0, extIndex);
+        path[0..<extIndex]
     }
 }

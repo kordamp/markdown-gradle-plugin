@@ -73,6 +73,7 @@ class MarkdownProcessor {
      * @param conf If provided, creates a custom remark with unique settings just for this instance
      * @return Markdown-formatted text
      */
+    @SuppressWarnings('DuplicateStringLiteral')
     String htmlToMarkdown(String text, Map conf = [:]) {
         // lazily created, so we call the method directly
         Remark r = getRemark(conf)
@@ -159,7 +160,9 @@ class MarkdownProcessor {
 
         if (conf) {
             def all = conf.all as Boolean
-            def pdExtension = { result.pegdownExtensions = result.pegdownExtensions | it }
+            def pdExtension = {
+                result.pegdownExtensions = result.pegdownExtensions | it
+            }
             def enableIf = { test, rm, pd ->
                 if (all || test) {
                     result.remarkOptions[rm] = true
@@ -212,6 +215,6 @@ class MarkdownProcessor {
             }
         }
 
-        return result
+        result
     }
 }
