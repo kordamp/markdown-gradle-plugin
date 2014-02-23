@@ -55,7 +55,7 @@ Non markdown files will be copied "as is" to `outputDir`.
 
 #### htmlToMarkdown
 
- * source - where the html sources are. Type: File. Default: `src/html`.
+ * sourceDir - where the html sources are. Type: File. Default: `src/html`.
  * outputDir - where generated markdown go. Type: File. Default: `$buildDir/gen-markdown`.
  * configuration - a Map with further config tweaks. Explained in the next section
  
