@@ -3,7 +3,7 @@ Markdown Gradle Plugin
 
 [![Travis Build Status](https://travis-ci.org/aalmiray/markdown-gradle-plugin.png?branch=master)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
 [![Coverage Status](https://coveralls.io/repos/aalmiray/markdown-gradle-plugin/badge.png)](https://coveralls.io/r/aalmiray/markdown-gradle-plugin)
-[![Tred](https://d2weczhvl823v0.cloudfront.net/markdown/markdown-gradle-plugin/trend.png)](https://bitdeli.com/free)
+[![Trend](https://d2weczhvl823v0.cloudfront.net/aalmiray/markdown-gradle-plugin/trend.png)](https://bitdeli.com/free)
 [![Semantic Versioning](http://img.shields.io/:semver-0.1.0-blue.svg)](http://semver.org)
 
 [![Bintray](https://api.bintray.com/packages/aalmiray/kordamp/markdown-gradle-plugin/images/download.png)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin/0.1)
