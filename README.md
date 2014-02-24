@@ -248,3 +248,7 @@ History
 [Remark]: http://remark.overzealous.com/manual/index.html
 [Markdown Extra]: http://michelf.com/projects/php-markdown/extra/
 [Multimarkdown]: http://fletcher.github.com/peg-multimarkdown/#tables
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/aalmiray/markdown-gradle-plugin/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
