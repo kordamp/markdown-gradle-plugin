@@ -29,14 +29,12 @@ buildscript {
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
-apply plugin: 'maven'
 apply plugin: 'codenarc'
 apply plugin: 'cobertura'
 apply plugin: 'coveralls'
 apply plugin: 'build-dashboard'
-apply plugin: 'maven-publish'
 apply plugin: 'license'
-apply plugin: 'bintray'
+apply from: 'gradle/publish.gradle'
 
 repositories {
     jcenter()
@@ -79,62 +77,12 @@ codenarc {
 }
 
 task sourceJar(type: Jar) {
-    description "An archive of the source code"
-    classifier "sources"
+    group 'Build'
+    description 'An archive of the source code'
+    classifier 'sources'
     from sourceSets.main.allSource
 }
 
 artifacts {
-    archives jar, sourceJar
-}
-
-publishing {
-    publications {
-        mavenCustom(MavenPublication) {
-            from components.java
-            pom.withXml {
-                asNode().with {
-                    appendNode('description',
-                        'A Gradle plugin for transforming Markdown to HTML and back again')
-                    appendNode('url', 'https://github.com/aalmiray/markdown-gradle-plugin')
-                    appendNode('inceptionYear', '2013')
-                    appendNode('licenses')
-                        .appendNode('license')
-                            .appendNode('name', 'The Apache Software License, Version 2.0').parent()
-                            .appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt').parent()
-                            .appendNode('distribution', 'repo')
-                    appendNode('scm')
-                       .appendNode('url', 'https://github.com/aalmiray/markdown-gradle-plugin')
-                    Node developers = appendNode('developers')
-                    developers.appendNode('developer')
-                            .appendNode('id', 'aalmiray').parent()
-                            .appendNode('name', 'Andres Almiray').parent()
-                            .appendNode('roles')
-                                .appendNode('role', 'Developer')
-                    developers.appendNode('developer')
-                            .appendNode('id', 'tednaleid').parent()
-                            .appendNode('name', 'Ted Naleid').parent()
-                            .appendNode('roles')
-                                .appendNode('role', 'Developer')
-                }
-            }
-        }
-    }
-}
-
-if(!project.hasProperty('bintrayUsername')) ext.bintrayUsername = ''
-if(!project.hasProperty('bintrayApiKey')) ext.bintrayApiKey = ''
-
-bintray {
-    user = project.bintrayUsername
-    key = project.bintrayApiKey
-    publications = ['mavenCustom']
-    pkg {
-        repo = 'kordamp'
-        userOrg = 'aalmiray'
-        name = 'markdown-gradle-plugin'
-        desc = 'A Gradle plugin for transforming Markdown to HTML and back again'
-        licenses = ['Apache-2.0']
-        labels = ['gradle', 'plugin', 'markdown']
-    }
+    sourceJar
 }

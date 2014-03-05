@@ -1,0 +1,106 @@
+/*
+ * Copyright 2012-2014 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import java.text.SimpleDateFormat
+
+Date buildTimeAndDate = new Date()
+ext {
+    buildTime = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
+    buildDate = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
+}
+
+apply plugin: 'maven-publish'
+apply plugin: 'bintray'
+
+jar {
+    manifest {
+        attributes(
+            'Built-By': System.properties['user.name'],
+            'Created-By': System.properties['java.version'] + " (" + System.properties['java.vendor'] + " " + System.getProperty("java.vm.version") + ")",
+            'Build-Date': project.buildTime,
+            'Build-Time': project.buildDate,
+            'Specification-Title': project.name,
+            'Specification-Version': project.version,
+            'Specification-Vendor': 'https://github.com/aalmiray/markdown-gradle-plugin',
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.version,
+            'Implementation-Vendor': 'https://github.com/aalmiray/markdown-gradle-plugin'
+        )
+    }
+}
+
+def pomConfig = {
+    name project.name
+    description 'A Gradle plugin for transforming Markdown to HTML and back again'
+    url 'https://github.com/aalmiray/markdown-gradle-plugin'
+    inceptionYear '2013'
+    licenses {
+        license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            distribution 'repo'
+        }
+    }
+    scm {
+        url 'https://github.com/aalmiray/markdown-gradle-plugin'
+    }
+    developers {
+        [
+            aalmiray: 'Andres Almiray',
+            tednaleid: 'Ted Naleid',
+        ].each { devId, devName ->
+            developer {
+                id devId
+                name devName
+                roles {
+                    role 'Developer'
+                }
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenCustom(MavenPublication) {
+            from components.java
+            artifact sourceJar
+
+            pom.withXml {
+                asNode().children().last() + pomConfig
+            }
+        }
+    }
+}
+
+task install(dependsOn: publishToMavenLocal)
+
+if (!project.hasProperty('bintrayUsername')) ext.bintrayUsername = ''
+if (!project.hasProperty('bintrayApiKey')) ext.bintrayApiKey = ''
+
+bintray {
+    user = project.bintrayUsername
+    key = project.bintrayApiKey
+    publications = ['mavenCustom']
+    pkg {
+        repo = 'kordamp'
+        userOrg = 'aalmiray'
+        name = 'markdown-gradle-plugin'
+        desc = 'A Gradle plugin for transforming Markdown to HTML and back again'
+        licenses = ['Apache-2.0']
+        labels = ['gradle', 'plugin', 'markdown']
+    }
+}
