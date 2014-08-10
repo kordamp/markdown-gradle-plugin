@@ -23,13 +23,13 @@ Use the following snippet
     buildscript {
         repositories {
             jcenter()
-            mavenRepo name: 'Bintray', url: 'http://dl.bintray.com/content/aalmiray/kordamp'
+            maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
         }
         dependencies {
-            classpath 'org.kordamp:markdown-gradle-plugin:0.1'
+            classpath 'org.kordamp:markdown-gradle-plugin:0.1.1'
         }
     }
-    apply plugin: 'markdown'
+    apply plugin: 'org.kordamp.gradle.markdown'
 
 
 Usage
