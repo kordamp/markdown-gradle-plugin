@@ -1,8 +1,8 @@
 Markdown Gradle Plugin
 -------------------------
 
-[![Travis Build Status](http://img.shields.io/travis/aalmiray/markdown-gradle-plugin.png?branch=master)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
-[![Coverage Status](http://img.shields.io/coveralls/aalmiray/markdown-gradle-plugin/badge.png)](https://coveralls.io/r/aalmiray/markdown-gradle-plugin)
+[![Travis Build Status](http://img.shields.io/travis/aalmiray/markdown-gradle-plugin.svg)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
+[![Coverage Status](http://img.shields.io/coveralls/aalmiray/markdown-gradle-plugin.svg)](https://coveralls.io/r/aalmiray/markdown-gradle-plugin)
 [![Semantic Versioning](http://img.shields.io/:semver-0.1.1-blue.svg)](http://semver.org)
 [![Bintray](http://img.shields.io/badge/download-latest-bb00bb.svg)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin)
 
