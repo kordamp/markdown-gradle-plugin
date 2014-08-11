@@ -21,7 +21,16 @@ import org.pegdown.PegDownProcessor
 
 import java.util.concurrent.locks.ReentrantLock
 
-import static org.pegdown.Extensions.*
+import static org.pegdown.Extensions.ABBREVIATIONS
+import static org.pegdown.Extensions.AUTOLINKS
+import static org.pegdown.Extensions.DEFINITIONS
+import static org.pegdown.Extensions.FENCED_CODE_BLOCKS
+import static org.pegdown.Extensions.HARDWRAPS
+import static org.pegdown.Extensions.QUOTES
+import static org.pegdown.Extensions.SMARTS
+import static org.pegdown.Extensions.SMARTYPANTS
+import static org.pegdown.Extensions.SUPPRESS_ALL_HTML
+import static org.pegdown.Extensions.TABLES
 
 /**
  * @author Ted Naleid
