@@ -1,11 +1,10 @@
 Markdown Gradle Plugin
 -------------------------
 
-[![Travis Build Status](https://travis-ci.org/aalmiray/markdown-gradle-plugin.png?branch=master)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
-[![Coverage Status](https://coveralls.io/repos/aalmiray/markdown-gradle-plugin/badge.png)](https://coveralls.io/r/aalmiray/markdown-gradle-plugin)
-[![Semantic Versioning](http://img.shields.io/:semver-0.1.0-blue.svg)](http://semver.org)
-
-[![Bintray](https://api.bintray.com/packages/aalmiray/kordamp/markdown-gradle-plugin/images/download.png)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin)
+[![Travis Build Status](http://img.shields.io/travis/aalmiray/markdown-gradle-plugin.png?branch=master)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
+[![Coverage Status](http://img.shields.io/coveralls/aalmiray/markdown-gradle-plugin/badge.png)](https://coveralls.io/r/aalmiray/markdown-gradle-plugin)
+[![Semantic Versioning](http://img.shields.io/:semver-0.1.1-blue.svg)](http://semver.org)
+[![Bintray](http://img.shields.io/badge/download-latest-bb00bb.svg)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin)
 
 This plugin provides a facility for converting markdown into HTML, as well as
 converting HTML back into markdown. It is based on the [grails-markdown][]
@@ -236,11 +235,13 @@ not necessarily at startup.
 History
 -------
 
+### 0.1.1
+
+ * Publish plugin to [Gradle Plugin Portal][]
+
 ### 0.1
 
  * First release.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/aalmiray/markdown-gradle-plugin/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 [grails-markdown]: http://grails.org/plugin/markdown
 [Daring Fireball]: http://daringfireball.net/projects/markdown/basics
@@ -248,3 +249,4 @@ History
 [Remark]: http://remark.overzealous.com/manual/index.html
 [Markdown Extra]: http://michelf.com/projects/php-markdown/extra/
 [Multimarkdown]: http://fletcher.github.com/peg-multimarkdown/#tables
+[Gradle Plugin Portal]: http://plugins.gradle.org/
