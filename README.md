@@ -39,7 +39,7 @@ three properties as part of their configuration
 
 #### markdownToHtml
 
- * source - where the markdown sources are. Type: File. Default: `src/markdown`.
+ * sourceDir - where the markdown sources are. Type: File. Default: `src/markdown`.
  * outputDir - where generated html go. Type: File. Default: `$buildDir/gen-html`.
  * configuration - a Map with further config tweaks. Explained in the next section
  
