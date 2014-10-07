@@ -49,6 +49,7 @@ enum Conversion {
         targetExtension
     }
 
+    @SuppressWarnings('ConfusingMethodName')
     List<String> extensions() {
         extensions
     }
