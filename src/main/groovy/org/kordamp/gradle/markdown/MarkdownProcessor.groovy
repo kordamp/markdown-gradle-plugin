@@ -64,7 +64,7 @@ class MarkdownProcessor {
         // we have to lock, because pegdown is not thread-safe<
         try {
             processorLock.lock()
-            result = p.markdownToHtml((String) text)
+            result = p.markdownToHtml((String) text, new MarkdownToHtmlLinkRenderer() )
         } finally {
             processorLock.unlock()
         }
