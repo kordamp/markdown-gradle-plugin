@@ -49,6 +49,10 @@ enum Conversion {
         targetExtension
     }
 
+    List<String> extensions() {
+        extensions
+    }
+
 //    String exclusions() {
 //        extensions.collect([]) { '**/*' + it }.join(', ')
 //    }
