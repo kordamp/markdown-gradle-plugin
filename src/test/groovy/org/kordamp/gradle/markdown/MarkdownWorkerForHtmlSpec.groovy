@@ -27,7 +27,7 @@ class MarkdownWorkerForHtmlSpec extends Specification {
         }
     }
 
-    def "Renders simple HTML"() {
+    def "Renders simple MD from HTML"() {
         when:
         MarkdownWorker worker = new MarkdownWorkerImpl()
         worker.process(Conversion.HTML, sourceDir, outputDir, [:])

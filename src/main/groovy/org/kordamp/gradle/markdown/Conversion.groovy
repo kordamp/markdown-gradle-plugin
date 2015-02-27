@@ -49,6 +49,11 @@ enum Conversion {
         targetExtension
     }
 
+    @SuppressWarnings('ConfusingMethodName')
+    List<String> extensions() {
+        extensions
+    }
+
 //    String exclusions() {
 //        extensions.collect([]) { '**/*' + it }.join(', ')
 //    }
