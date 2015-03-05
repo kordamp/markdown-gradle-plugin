@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,21 +20,20 @@ buildscript {
     }
 
     dependencies {
-        classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.2.4'
-        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
+        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.8'
+        classpath 'nu.studer:gradle-plugindev-plugin:1.0.3'
     }
 }
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
-apply plugin: 'codenarc'
-apply plugin: 'cobertura'
-apply plugin: 'coveralls'
-apply plugin: 'build-dashboard'
-apply plugin: 'license'
-apply from: 'gradle/publish.gradle'
+apply plugin: 'nu.studer.plugindev'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'com.github.ben-manes.versions'
+apply from: 'gradle/code-coverage.gradle'
+apply from: 'gradle/code-quality.gradle'
 
 repositories {
     jcenter()
@@ -44,45 +43,71 @@ repositories {
 dependencies {
     compile gradleApi()
     compile 'com.overzealous:remark:0.9.3',
-            'org.jsoup:jsoup:1.7.2',
-            'org.apache.commons:commons-lang3:3.1',
-            'org.pegdown:pegdown:1.2.1'
-    testCompile('org.spockframework:spock-core:0.6-groovy-1.8') {
+        'org.jsoup:jsoup:1.7.2',
+        'org.apache.commons:commons-lang3:3.1',
+        'org.pegdown:pegdown:1.2.1'
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
         exclude group: 'org.hamcrest', module: 'hamcrest-core'
     }
-    testCompile 'cglib:cglib-nodep:2.2.2'
+    testCompile 'cglib:cglib-nodep:3.1'
 }
 
-license {
-    header = rootProject.file('config/HEADER')
-    strictCheck = true
-    ignoreFailures = false
-    mapping {
-        java ='SLASHSTAR_STYLE'
-        groovy ='SLASHSTAR_STYLE'
+plugindev {
+    pluginId = 'org.kordamp.markdown.convert'
+    pluginImplementationClass 'org.kordamp.gradle.markdown.MarkdownPlugin'
+    pluginDescription 'A Gradle plugin for transforming Markdown to HTML and back again'
+    pluginLicenses 'Apache-2.0'
+    pluginTags 'gradle', 'plugin', 'markdown'
+    authorId 'aalmiray'
+    authorName 'Andres Almiray'
+    authorEmail 'aalmiray@yahoo.com'
+    projectUrl 'https://github.com/aalmiray/markdown-gradle-plugin'
+    projectInceptionYear '2013'
+    pomConfiguration {
+        name 'markdown-gradle-plugin'
+        description 'A Gradle plugin for transforming Markdown to HTML and back again'
+        url 'https://github.com/aalmiray/markdown-gradle-plugin'
+        inceptionYear '2013'
+        licenses {
+            license([:]) {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution 'repo'
+            }
+        }
+        scm {
+            url 'https://github.com/aalmiray/markdown-gradle-plugin'
+        }
+        developers {
+            [
+                aalmiray : 'Andres Almiray',
+                tednaleid: 'Ted Naleid',
+            ].each { devId, devName ->
+                developer {
+                    id devId
+                    name devName
+                    roles {
+                        role 'Developer'
+                    }
+                }
+            }
+        }
+        contributors {
+            [
+                madmas: 'Markus Schlichting',
+                iruiz : 'Ix-chel Ruiz'
+            ].each { devId, devName ->
+                contributor {
+                    name devName
+                    roles {
+                        role 'contributor'
+                    }
+                }
+            }
+        }
     }
-    ext.year = '2012-2014'
+    done()
 }
 
-cobertura {
-    coverageFormats = ['html', 'xml']
-    coverageSourceDirs = sourceSets.main.groovy.srcDirs
-}
-
-codenarc {
-    configFile = file('config/codenarc/codenarc.groovy')
-    // run codenarc on production sources only
-    sourceSets = [project.sourceSets.main]
-}
-
-task sourceJar(type: Jar) {
-    group 'Build'
-    description 'An archive of the source code'
-    classifier 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    sourceJar
-}
+apply from: 'gradle/publish.gradle'
