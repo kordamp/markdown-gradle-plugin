@@ -26,7 +26,7 @@ license {
         groovy ='SLASHSTAR_STYLE'
     }
     ext.year = '2013-2015'
-    excludes(['**/*.md', '**/fake.html'])
+    excludes(['**/*.md', '**/*.html'])
 }
 
 codenarc {

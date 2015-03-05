@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 the original author or authors.
+ * Copyright 2013-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
+import java.nio.charset.StandardCharsets
+
 /**
  * @author Andres Almiray
  */
@@ -30,8 +32,8 @@ class MarkdownToHtmlTask extends DefaultTask {
     @OutputDirectory File outputDir
     @Input Map configuration = [:]
 
-    @Optional @Input String inputEncoding = 'UTF-8'
-    @Optional @Input String outputEncoding = 'UTF-8'
+    @Optional @Input String inputEncoding = StandardCharsets.UTF_8.displayName()
+    @Optional @Input String outputEncoding = StandardCharsets.UTF_8.displayName()
 
     MarkdownWorker worker
 

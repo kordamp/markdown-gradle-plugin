@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 the original author or authors.
+ * Copyright 2013-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 package org.kordamp.gradle.markdown
+
+import java.nio.charset.StandardCharsets
+
 /**
  * @author Andres Almiray
  */
@@ -22,8 +25,8 @@ class MarkdownWorkerImpl implements MarkdownWorker {
         File sourceDir = options.sourceDir
         File outputDir = options.outputDir
 
-        String inputEncoding = options.inputEncoding ?: 'UTF-8'
-        String outputEncoding = options.outputEncoding ?: 'UTF-8'
+        String inputEncoding = options.inputEncoding ?: StandardCharsets.UTF_8.displayName()
+        String outputEncoding = options.outputEncoding ?: StandardCharsets.UTF_8.displayName()
 
         outputDir.mkdirs()
 
