@@ -3,8 +3,8 @@ Markdown Gradle Plugin
 
 [![Travis Build Status](http://img.shields.io/travis/aalmiray/markdown-gradle-plugin.svg)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
 [![Coverage Status](http://img.shields.io/coveralls/aalmiray/markdown-gradle-plugin.svg)](https://coveralls.io/r/aalmiray/markdown-gradle-plugin)
-[![Semantic Versioning](http://img.shields.io/:semver-0.1.1-blue.svg)](http://semver.org)
-[![Bintray](http://img.shields.io/badge/download-latest-bb00bb.svg)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin)
+[![Bintray](https://api.bintray.com/packages/aalmiray/kordamp/markdown-gradle-plugin/images/download.svg)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin)
+
 
 This plugin provides a facility for converting markdown into HTML, as well as
 converting HTML back into markdown. It is based on the [grails-markdown][]
@@ -25,10 +25,10 @@ Use the following snippet
             maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
         }
         dependencies {
-            classpath 'org.kordamp:markdown-gradle-plugin:0.1.1'
+            classpath 'org.kordamp:markdown-gradle-plugin:1.0.0'
         }
     }
-    apply plugin: 'org.kordamp.gradle.markdown'
+    apply plugin: 'org.kordamp.markdown.convert'
 
 
 Usage
@@ -41,7 +41,9 @@ three properties as part of their configuration
 
  * sourceDir - where the markdown sources are. Type: File. Default: `src/markdown`.
  * outputDir - where generated html go. Type: File. Default: `$buildDir/gen-html`.
- * configuration - a Map with further config tweaks. Explained in the next section
+ * configuration - a Map with further config tweaks. Explained in the next section.
+ * inputEncoding - the file encoding used to read all files inside `sourceDir`.
+ * outputEncoding - the file encoding used to write all files to `outputDir`.
  
 Sources may have any of the following extensions in order to be discovered
 
@@ -54,7 +56,9 @@ Non markdown files will be copied "as is" to `outputDir`.
 
  * sourceDir - where the html sources are. Type: File. Default: `src/html`.
  * outputDir - where generated markdown go. Type: File. Default: `$buildDir/gen-markdown`.
- * configuration - a Map with further config tweaks. Explained in the next section
+ * configuration - a Map with further config tweaks. Explained in the next section.
+ * inputEncoding - the file encoding used to read all files inside `sourceDir`.
+ * outputEncoding - the file encoding used to write all files to `outputDir`.
  
 Sources may have any of the following extensions in order to be discovered
 
@@ -234,6 +238,12 @@ not necessarily at startup.
 
 History
 -------
+
+### 1.0.0
+
+ * Allow input/output encoding to be configured. (#13)
+ * Migrate build to Gradle 2.3.
+ * Autoconvert file markdown extension when converting to HTML (#7)
 
 ### 0.1.1
 
