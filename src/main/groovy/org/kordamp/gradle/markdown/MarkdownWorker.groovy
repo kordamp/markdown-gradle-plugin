@@ -18,5 +18,5 @@ package org.kordamp.gradle.markdown
  * @author Andres Almiray
  */
 interface MarkdownWorker {
-    void process(Conversion conversion, File sourceDir, File outputDir, Map configuration)
+    void process(Conversion conversion, Map<String,Object> options, Map<String,Object> configuration)
 }

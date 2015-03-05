@@ -18,6 +18,7 @@ package org.kordamp.gradle.markdown
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
@@ -28,6 +29,10 @@ class MarkdownToHtmlTask extends DefaultTask {
     @InputDirectory File sourceDir
     @OutputDirectory File outputDir
     @Input Map configuration = [:]
+
+    @Optional @Input String inputEncoding = 'UTF-8'
+    @Optional @Input String outputEncoding = 'UTF-8'
+
     MarkdownWorker worker
 
     MarkdownToHtmlTask() {
@@ -38,6 +43,12 @@ class MarkdownToHtmlTask extends DefaultTask {
 
     @TaskAction
     void runTask() {
-        worker.process(Conversion.MARKDOWN, sourceDir, outputDir, configuration)
+        Map options = [
+            sourceDir: sourceDir,
+            outputDir: outputDir,
+            inputEncoding: inputEncoding,
+            outputEncoding: outputEncoding
+        ]
+        worker.process(Conversion.MARKDOWN, options, configuration)
     }
 }

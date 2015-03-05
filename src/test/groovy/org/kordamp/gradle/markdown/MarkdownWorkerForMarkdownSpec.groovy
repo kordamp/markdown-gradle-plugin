@@ -30,7 +30,7 @@ class MarkdownWorkerForMarkdownSpec extends Specification {
     def "Renders simple HTML"() {
         when:
         MarkdownWorker worker = new MarkdownWorkerImpl()
-        worker.process(Conversion.MARKDOWN, sourceDir, outputDir, [:])
+        worker.process(Conversion.MARKDOWN, [sourceDir: sourceDir, outputDir: outputDir], [:])
 
         then:
         !outputDir.list().toList().isEmpty()
@@ -49,7 +49,7 @@ class MarkdownWorkerForMarkdownSpec extends Specification {
             autoLinks: true
         ]
         MarkdownWorker worker = new MarkdownWorkerImpl()
-        worker.process(Conversion.MARKDOWN, sourceDir, outputDir, configuration)
+        worker.process(Conversion.MARKDOWN, [sourceDir: sourceDir, outputDir: outputDir], configuration)
 
         then:
         !outputDir.list().toList().isEmpty()

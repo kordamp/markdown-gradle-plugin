@@ -18,7 +18,13 @@ package org.kordamp.gradle.markdown
  * @author Andres Almiray
  */
 class MarkdownWorkerImpl implements MarkdownWorker {
-    void process(Conversion conversion, File sourceDir, File outputDir, Map configuration) {
+    void process(Conversion conversion, Map<String, Object> options, Map<String, Object> configuration) {
+        File sourceDir = options.sourceDir
+        File outputDir = options.outputDir
+
+        String inputEncoding = options.inputEncoding ?: 'UTF-8'
+        String outputEncoding = options.outputEncoding ?: 'UTF-8'
+
         outputDir.mkdirs()
 
         sourceDir.eachFileRecurse { file ->
@@ -27,9 +33,10 @@ class MarkdownWorkerImpl implements MarkdownWorker {
             } else {
                 File destinationParentDir = outputDirFor(file, sourceDir.absolutePath, outputDir)
                 if (conversion.accept(file)) {
-                    String content = conversion.convert(file, configuration)
+                    String input = file.getText(inputEncoding)
+                    String output = conversion.convert(input, configuration)
                     File target = new File("${destinationParentDir}/${stripFilenameExtension(file.name)}${conversion.targetExtension()}")
-                    target.text = content
+                    target.withWriter(outputEncoding) { w -> w.write(output) }
                 } else {
                     File target = new File("${destinationParentDir}/${file.name}")
                     target.withOutputStream { it << file.newInputStream() }

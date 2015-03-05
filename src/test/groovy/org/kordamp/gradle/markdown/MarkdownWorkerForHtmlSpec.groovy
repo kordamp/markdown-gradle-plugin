@@ -30,7 +30,7 @@ class MarkdownWorkerForHtmlSpec extends Specification {
     def "Renders simple MD from HTML"() {
         when:
         MarkdownWorker worker = new MarkdownWorkerImpl()
-        worker.process(Conversion.HTML, sourceDir, outputDir, [:])
+        worker.process(Conversion.HTML, [sourceDir: sourceDir, outputDir: outputDir], [:])
 
         then:
         !outputDir.list().toList().isEmpty()

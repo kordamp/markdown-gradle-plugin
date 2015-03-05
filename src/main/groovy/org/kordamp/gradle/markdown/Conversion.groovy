@@ -54,20 +54,8 @@ enum Conversion {
         extensions
     }
 
-//    String exclusions() {
-//        extensions.collect([]) { '**/*' + it }.join(', ')
-//    }
-
-    String convert(File file, Map configuration) {
-//, String basedir, File outputDir) {
-        processor."$methodName"(file.text, configuration)
-        /*
-        String relativeFilePath = file.parentFile.absolutePath - basedir
-        File destinationParentDir = new File("${outputDir}/${relativeFilePath}")
-        destinationParentDir.mkdirs()
-        File target = new File("${destinationParentDir}/${stripFilenameExtension(file.name)}${targetExtension}")
-        target.text = text
-        */
+    String convert(String input, Map configuration) {
+        processor."$methodName"(input, configuration)
     }
 
     /**
