@@ -153,6 +153,7 @@ class MarkdownProcessor {
     //------------------------------------------------------------------------
 
     // sets up the default configuration for markdown and pegdown
+    @SuppressWarnings('AssignmentToStaticFieldFromInstanceMethod')
     private void setupConfigurations() {
         if (remarkOptions == null) {
             Map opts = getConfigurations(new ConfigObject())
@@ -164,6 +165,7 @@ class MarkdownProcessor {
 
     // this is where the configuration actually happens
     // conf can be set via any map-like object
+    @SuppressWarnings('Instanceof')
     private static Map getConfigurations(Map conf) {
         Map result = [remarkOptions: Options.pegdownBase(), pegdownExtensions: 0, baseUri: null]
 

@@ -35,6 +35,22 @@ class MarkdownToHtmlTask extends DefaultTask {
     @Optional @Input String inputEncoding = StandardCharsets.UTF_8.displayName()
     @Optional @Input String outputEncoding = StandardCharsets.UTF_8.displayName()
 
+    @Optional @Input Boolean hardwraps
+    @Optional @Input Boolean autoLinks
+    @Optional @Input Boolean abbreviations
+    @Optional @Input Boolean definitionLists
+    @Optional @Input Boolean smartQuotes
+    @Optional @Input Boolean smartPunctuation
+    @Optional @Input Boolean smart
+    @Optional @Input Boolean fencedCodeBlocks
+    @Optional @Input Boolean tables
+    @Optional @Input Boolean all
+    @Optional @Input Boolean removeHtml
+    @Optional @Input Boolean removeTables
+    @Optional @Input String baseUri
+    @Optional @Input Closure customizePegdown
+    @Optional @Input Closure customizeRemark
+
     MarkdownWorker worker
 
     MarkdownToHtmlTask() {
@@ -46,11 +62,47 @@ class MarkdownToHtmlTask extends DefaultTask {
     @TaskAction
     void runTask() {
         Map options = [
-            sourceDir: sourceDir,
-            outputDir: outputDir,
-            inputEncoding: inputEncoding,
+            sourceDir     : sourceDir,
+            outputDir     : outputDir,
+            inputEncoding : inputEncoding,
             outputEncoding: outputEncoding
         ]
-        worker.process(Conversion.MARKDOWN, options, configuration)
+        worker.process(Conversion.MARKDOWN, options, mergeConfiguration())
+    }
+
+    @SuppressWarnings('UnnecessaryObjectReferences')
+    private Map mergeConfiguration() {
+        Map config = [:]
+
+        config.putAll(configuration)
+        if (hardwraps != null) config.hardwraps = hardwraps
+        if (autoLinks != null) config.autoLinks = autoLinks
+        if (abbreviations != null) config.abbreviations = abbreviations
+        if (definitionLists != null) config.definitionLists = definitionLists
+        if (smartQuotes != null) config.smartQuotes = smartQuotes
+        if (smartPunctuation != null) config.smartPunctuation = smartPunctuation
+        if (smart != null) {
+            config.smartQuotes = smart
+            config.smartPunctuation = smart
+        }
+        if (fencedCodeBlocks != null) config.fencedCodeBlocks = fencedCodeBlocks
+        if (tables != null) config.tables = tables
+        if (all != null) {
+            config.hardwraps = all
+            config.autoLinks = all
+            config.abbreviations = all
+            config.definitionLists = all
+            config.smartQuotes = all
+            config.smartPunctuation = all
+            config.fencedCodeBlocks = all
+            config.tables = all
+        }
+        if (removeHtml != null) config.removeHtml = removeHtml
+        if (removeTables != null) config.removeTables = removeTables
+        if (baseUri != null) config.baseUri = baseUri
+        if (customizePegdown != null) config.customizePegdown = customizePegdown
+        if (customizeRemark != null) config.customizeRemark = customizeRemark
+
+        config
     }
 }
