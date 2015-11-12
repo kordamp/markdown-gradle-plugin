@@ -25,12 +25,14 @@ buildscript {
         classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
         classpath 'com.gradle.publish:plugin-publish-plugin:0.9.1'
+        classpath 'nu.studer:gradle-plugindev-plugin:1.0.4'
     }
 }
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
-apply plugin: "com.gradle.plugin-publish"
+apply plugin: 'nu.studer.plugindev'
+apply plugin: 'com.gradle.plugin-publish'
 apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'com.github.ben-manes.versions'
 apply from: 'gradle/code-coverage.gradle'
@@ -73,6 +75,63 @@ pluginBundle {
         groupId    = 'org.kordamp'
         artifactId = 'markdown-gradle-plugin'
     }
+}
+
+plugindev {
+    pluginId = 'org.kordamp.markdown.convert'
+    pluginImplementationClass 'org.kordamp.gradle.markdown.MarkdownPlugin'
+    pluginDescription 'A Gradle plugin for transforming Markdown to HTML and back again'
+    pluginLicenses 'Apache-2.0'
+    pluginTags 'gradle', 'plugin', 'markdown'
+    authorId 'aalmiray'
+    authorName 'Andres Almiray'
+    authorEmail 'aalmiray@yahoo.com'
+    projectUrl 'https://github.com/aalmiray/markdown-gradle-plugin'
+    projectInceptionYear '2013'
+    pomConfiguration {
+        name 'markdown-gradle-plugin'
+        description 'A Gradle plugin for transforming Markdown to HTML and back again'
+        url 'https://github.com/aalmiray/markdown-gradle-plugin'
+        inceptionYear '2013'
+        licenses {
+            license([:]) {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution 'repo'
+            }
+        }
+        scm {
+            url 'https://github.com/aalmiray/markdown-gradle-plugin'
+        }
+        developers {
+            [
+                aalmiray : 'Andres Almiray',
+                tednaleid: 'Ted Naleid',
+            ].each { devId, devName ->
+                developer {
+                    id devId
+                    name devName
+                    roles {
+                        role 'Developer'
+                    }
+                }
+            }
+        }
+        contributors {
+            [
+                madmas: 'Markus Schlichting',
+                iruiz : 'Ix-chel Ruiz'
+            ].each { devId, devName ->
+                contributor {
+                    name devName
+                    roles {
+                        role 'contributor'
+                    }
+                }
+            }
+        }
+    }
+    done()
 }
 
 apply from: 'gradle/publish.gradle'
