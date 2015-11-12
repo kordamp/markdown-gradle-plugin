@@ -65,7 +65,7 @@ pluginBundle {
 
     plugins {
         markdownPlugin {
-            id = 'org.kordamp.markdown.convert:'
+            id = 'org.kordamp.markdown.convert'
             displayName = 'Gradle Markdown plugin'
             tags = ['gradle', 'plugin', 'markdown', 'html', 'converter']
         }
