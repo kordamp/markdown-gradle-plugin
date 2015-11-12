@@ -38,3 +38,14 @@ jar {
         )
     }
 }
+
+task install(dependsOn: publishToMavenLocal)
+
+if (!project.hasProperty('bintrayUsername')) ext.bintrayUsername = ''
+if (!project.hasProperty('bintrayApiKey')) ext.bintrayApiKey = ''
+
+bintray {
+    user = project.bintrayUsername
+    key = project.bintrayApiKey
+    pkg.repo = 'kordamp'
+}
