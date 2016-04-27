@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2015 the original author or authors.
+ * Copyright 2013-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,6 @@ ext {
     buildTime = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
 }
 
-def projectArtifactId = 'markdown-gradle-plugin'
-
 jar {
     manifest {
         attributes(
@@ -31,21 +29,119 @@ jar {
             'Created-By': System.properties['java.version'] + " (" + System.properties['java.vendor'] + " " + System.properties['java.vm.version'] + ")",
             'Build-Date': project.buildDate,
             'Build-Time': project.buildTime,
-            'Specification-Title': projectArtifactId,
+            'Build-Revision': versioning.info.commit,
+            'Specification-Title': project.name,
             'Specification-Version': project.version,
-            'Implementation-Title': projectArtifactId,
+            'Implementation-Title': project.name,
             'Implementation-Version': project.version
         )
     }
+
+    metaInf {
+        from '.'
+        include 'LICENSE*'
+    }
 }
 
-task install(dependsOn: publishToMavenLocal)
+def pomConfig = {
+    name project.name
+    description project.project_description
+    url project.project_website
+    inceptionYear '2013'
+    licenses {
+        license([:]) {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            distribution 'repo'
+        }
+    }
+    scm {
+        url project.project_vcs
+    }
+    developers {
+        [
+            aalmiray : 'Andres Almiray',
+            tednaleid: 'Ted Naleid',
+        ].each { devId, devName ->
+            developer {
+                id devId
+                name devName
+                roles {
+                    role 'Developer'
+                }
+            }
+        }
+    }
+    contributors {
+        [
+            madmas: 'Markus Schlichting',
+            iruiz : 'Ix-chel Ruiz'
+        ].each { devId, devName ->
+            contributor {
+                name devName
+                roles {
+                    role 'contributor'
+                }
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom.withXml {
+                asNode().children().last() + pomConfig
+                asNode().appendNode('description', project.project_description)
+            }
+        }
+    }
+}
 
 if (!project.hasProperty('bintrayUsername')) ext.bintrayUsername = ''
-if (!project.hasProperty('bintrayApiKey')) ext.bintrayApiKey = ''
+if (!project.hasProperty('bintrayKey')) ext.bintrayKey = ''
 
 bintray {
-    user = project.bintrayUsername
-    key = project.bintrayApiKey
-    pkg.repo = 'kordamp'
+    user = bintrayUsername
+    key = bintrayKey
+    publications = ['mavenJava']
+    pkg {
+        userOrg = 'aalmiray'
+        repo = 'markdown'
+        name = 'markdown-gradle-plugin'
+        desc = project.project_description
+        licenses = ['Apache-2.0']
+        labels = ['markdown']
+        websiteUrl = project.project_website
+        issueTrackerUrl = project.project_issues
+        vcsUrl = project.project_vcs
+        publicDownloadNumbers = true
+        version {
+            attributes = ['gradle-plugin': 'org.kordamp.markdown.convert:org.kordamp:markdown-gradle-plugin ']
+        }
+    }
+}
+
+pluginBundle {
+    website = project.project_website
+    vcsUrl = project.project_vcs
+    description = project.project_description
+    tags = ['markdown']
+
+    plugins {
+        markdownPlugin {
+            id = 'org.kordamp.markdown.convert'
+            displayName = 'Markdown Gradle Plugin'
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group
+        artifactId = project.name
+        version = project.version
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2015 the original author or authors.
+ * Copyright 2013-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,29 +14,21 @@
  * limitations under the License.
  */
 
-buildscript {
-    repositories {
-        jcenter()
-        maven { url 'https://plugins.gradle.org/m2/' }
-    }
-
-    dependencies {
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
-        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
-        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.1'
-        classpath 'nu.studer:gradle-plugindev-plugin:1.0.4'
-    }
+plugins {
+    id 'com.jfrog.bintray' version '1.6'
+    id 'com.github.hierynomus.license' version '0.11.0'
+    id 'net.nemerosa.versioning' version '1.7.1'
+    id 'com.github.ben-manes.versions' version '0.12.0'
+    id 'com.gradle.plugin-publish' version '0.9.4'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
+    id 'idea'
+    id 'groovy'
+    id 'maven-publish'
 }
 
-apply plugin: 'groovy'
-apply plugin: 'idea'
-apply plugin: 'nu.studer.plugindev'
-apply plugin: 'com.gradle.plugin-publish'
-apply plugin: 'com.github.kt3k.coveralls'
-apply plugin: 'com.github.ben-manes.versions'
 apply from: 'gradle/code-coverage.gradle'
 apply from: 'gradle/code-quality.gradle'
+apply from: 'gradle/publish.gradle'
 
 repositories {
     jcenter()
@@ -46,92 +38,49 @@ repositories {
 dependencies {
     compile gradleApi()
     compile 'com.overzealous:remark:1.0.0',
-        'org.jsoup:jsoup:1.8.3',
+        'org.jsoup:jsoup:1.9.1',
         'org.apache.commons:commons-lang3:3.4',
         'org.pegdown:pegdown:1.5.0'
     testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
         exclude group: 'org.hamcrest', module: 'hamcrest-core'
     }
-    testCompile 'cglib:cglib-nodep:3.2.0'
+    testCompile 'cglib:cglib-nodep:3.2.2'
 }
 
+javadoc {
+    excludes = ['**/*.html', 'META-INF/**']
 
-pluginBundle {
-    website = 'https://github.com/aalmiray/markdown-gradle-plugin'
-    vcsUrl  = 'https://github.com/aalmiray/markdown-gradle-plugin'
-
-    description = 'A Gradle plugin for transforming Markdown to HTML and back again'
-
-    plugins {
-        markdownPlugin {
-            id = 'org.kordamp.markdown.convert'
-            displayName = 'Gradle Markdown plugin'
-            tags = ['gradle', 'plugin', 'markdown', 'html', 'converter']
-        }
-    }
-
-    mavenCoordinates {
-        groupId    = 'org.kordamp'
-        artifactId = 'markdown-gradle-plugin'
-    }
+    options.use         = true
+    options.splitIndex  = true
+    options.encoding    = 'UTF-8'
+    options.author      = true
+    options.version     = true
+    options.windowTitle = "$project.name $project.version API"
+    options.docTitle    = "$project.name $project.version API"
+    options.links       = ['http://docs.oracle.com/javase/7/docs/api/']
 }
 
-plugindev {
-    pluginId = 'org.kordamp.markdown.convert'
-    pluginImplementationClass 'org.kordamp.gradle.markdown.MarkdownPlugin'
-    pluginDescription 'A Gradle plugin for transforming Markdown to HTML and back again'
-    pluginLicenses 'Apache-2.0'
-    pluginTags 'gradle', 'plugin', 'markdown'
-    authorId 'aalmiray'
-    authorName 'Andres Almiray'
-    authorEmail 'aalmiray@yahoo.com'
-    projectUrl 'https://github.com/aalmiray/markdown-gradle-plugin'
-    projectInceptionYear '2013'
-    pomConfiguration {
-        name 'markdown-gradle-plugin'
-        description 'A Gradle plugin for transforming Markdown to HTML and back again'
-        url 'https://github.com/aalmiray/markdown-gradle-plugin'
-        inceptionYear '2013'
-        licenses {
-            license([:]) {
-                name 'The Apache Software License, Version 2.0'
-                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                distribution 'repo'
-            }
-        }
-        scm {
-            url 'https://github.com/aalmiray/markdown-gradle-plugin'
-        }
-        developers {
-            [
-                aalmiray : 'Andres Almiray',
-                tednaleid: 'Ted Naleid',
-            ].each { devId, devName ->
-                developer {
-                    id devId
-                    name devName
-                    roles {
-                        role 'Developer'
-                    }
-                }
-            }
-        }
-        contributors {
-            [
-                madmas: 'Markus Schlichting',
-                iruiz : 'Ix-chel Ruiz'
-            ].each { devId, devName ->
-                contributor {
-                    name devName
-                    roles {
-                        role 'contributor'
-                    }
-                }
-            }
-        }
-    }
-    done()
+task sourcesJar(type: Jar) {
+    group 'Build'
+    description 'An archive of the source code'
+    classifier 'sources'
+    from sourceSets.main.allSource
 }
 
-apply from: 'gradle/publish.gradle'
+task javadocJar(type: Jar) {
+    group 'Build'
+    description 'An archive of the javadoc'
+    classifier 'javadoc'
+    from javadoc.destinationDir
+}
+
+jar.finalizedBy sourcesJar
+jar.finalizedBy javadocJar
+
+artifacts {
+    sourcesJar
+    javadocJar
+}
+
+task publishRelease(dependsOn: [bintrayUpload, publishPlugins]) {}
