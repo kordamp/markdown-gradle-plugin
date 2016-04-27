@@ -111,7 +111,7 @@ bintray {
     publications = ['mavenJava']
     pkg {
         userOrg = 'aalmiray'
-        repo = 'markdown'
+        repo = 'kordamp'
         name = 'markdown-gradle-plugin'
         desc = project.project_description
         licenses = ['Apache-2.0']
