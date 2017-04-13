@@ -53,8 +53,9 @@ class MarkdownToHtmlLinkRenderer extends LinkRenderer {
     private Rendering adjustHref( Rendering rendering ) {
         if(conversion.extensions().size() > 0) {
             def regex =  conversion.extensions().join('|\\')
-            regex = '(\\' + regex + ')\$'
-            rendering = new Rendering(rendering.href.replaceFirst(regex, conversion.targetExtension()), rendering.text)
+            regex = '(\\' + regex + ')(\$|#)'
+            def replacement = conversion.targetExtension() + '\$2'
+            rendering = new Rendering(rendering.href.replaceFirst(regex, replacement), rendering.text)
         }
         rendering
     }
