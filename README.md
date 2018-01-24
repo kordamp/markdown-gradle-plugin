@@ -27,7 +27,7 @@ Use the following snippet
             maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
         }
         dependencies {
-            classpath 'org.kordamp:markdown-gradle-plugin:1.3.0'
+            classpath 'org.kordamp:markdown-gradle-plugin:1.2.0'
         }
     }
     apply plugin: 'org.kordamp.markdown.convert'
