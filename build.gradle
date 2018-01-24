@@ -15,12 +15,12 @@
  */
 
 plugins {
-    id 'com.jfrog.bintray' version '1.6'
-    id 'com.github.hierynomus.license' version '0.11.0'
-    id 'net.nemerosa.versioning' version '1.7.1'
-    id 'com.github.ben-manes.versions' version '0.12.0'
-    id 'com.gradle.plugin-publish' version '0.9.4'
-    id 'com.github.kt3k.coveralls' version '2.6.3'
+    id 'com.jfrog.bintray' version '1.8.0'
+    id 'com.github.hierynomus.license' version '0.14.0'
+    id 'net.nemerosa.versioning' version '2.6.1'
+    id 'com.github.ben-manes.versions' version '0.17.0'
+    id 'com.gradle.plugin-publish' version '0.9.9'
+    id 'com.github.kt3k.coveralls' version '2.8.2'
     id 'idea'
     id 'groovy'
     id 'maven-publish'
@@ -32,20 +32,19 @@ apply from: 'gradle/publish.gradle'
 
 repositories {
     jcenter()
-    maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
 }
 
 dependencies {
     compile gradleApi()
-    compile 'com.overzealous:remark:1.0.0',
-        'org.jsoup:jsoup:1.9.1',
-        'org.apache.commons:commons-lang3:3.4',
+    compile 'com.overzealous:remark:1.1.0',
+        'org.jsoup:jsoup:1.11.2',
+        'org.apache.commons:commons-lang3:3.7',
         'org.pegdown:pegdown:1.5.0'
-    testCompile('org.spockframework:spock-core:1.0-groovy-2.4') {
+    testCompile('org.spockframework:spock-core:1.1-groovy-2.4') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
         exclude group: 'org.hamcrest', module: 'hamcrest-core'
     }
-    testCompile 'cglib:cglib-nodep:3.2.2'
+    testCompile 'cglib:cglib-nodep:3.2.6'
 }
 
 javadoc {
