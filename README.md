@@ -4,7 +4,7 @@ Markdown Gradle Plugin
 [![Travis Build Status](http://img.shields.io/travis/aalmiray/markdown-gradle-plugin.svg)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
 [![Coverage Status](http://img.shields.io/coveralls/aalmiray/markdown-gradle-plugin.svg)](https://coveralls.io/r/aalmiray/markdown-gradle-plugin)
 [![Bintray](https://api.bintray.com/packages/aalmiray/kordamp/markdown-gradle-plugin/images/download.svg)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin)
-[![Apache License 2](https://http://img.shields.io/badge/license-ASF2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+[![Apache License 2](http://img.shields.io/badge/license-ASF2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 [![Patreon](https://img.shields.io/badge/donations-Patreon-orange.svg)](https://www.patreon.com/user?u=6609318)
 
 
