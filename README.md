@@ -4,6 +4,8 @@ Markdown Gradle Plugin
 [![Travis Build Status](http://img.shields.io/travis/aalmiray/markdown-gradle-plugin.svg)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
 [![Coverage Status](http://img.shields.io/coveralls/aalmiray/markdown-gradle-plugin.svg)](https://coveralls.io/r/aalmiray/markdown-gradle-plugin)
 [![Bintray](https://api.bintray.com/packages/aalmiray/kordamp/markdown-gradle-plugin/images/download.svg)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin)
+[![Apache License 2](https://http://img.shields.io/badge/license-ASF2-blue.svg](http://www.apache.org/licenses/LICENSE-2.0.txt)
+[![Patreon](https://img.shields.io/badge/donations-Patreon-orange.svg)](https://www.patreon.com/user?u=6609318)
 
 
 This plugin provides a facility for converting markdown into HTML, as well as
@@ -25,7 +27,7 @@ Use the following snippet
             maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
         }
         dependencies {
-            classpath 'org.kordamp:markdown-gradle-plugin:1.0.0'
+            classpath 'org.kordamp:markdown-gradle-plugin:1.3.0'
         }
     }
     apply plugin: 'org.kordamp.markdown.convert'
@@ -235,23 +237,6 @@ Allows for customization of the Pegdown extensions before creating a
 Allows for customization of the Remark `Options` before creating a `Remark` using
 a closure. This closure will be called at the time the `Remark` is first needed,
 not necessarily at startup.
-
-History
--------
-
-### 1.0.0
-
- * Allow input/output encoding to be configured. (#13)
- * Migrate build to Gradle 2.3.
- * Autoconvert file markdown extension when converting to HTML (#7)
-
-### 0.1.1
-
- * Publish plugin to [Gradle Plugin Portal][]
-
-### 0.1
-
- * First release.
 
 [grails-markdown]: http://grails.org/plugin/markdown
 [Daring Fireball]: http://daringfireball.net/projects/markdown/basics
