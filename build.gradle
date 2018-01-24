@@ -39,7 +39,7 @@ dependencies {
     compile 'com.overzealous:remark:1.1.0',
         'org.jsoup:jsoup:1.11.2',
         'org.apache.commons:commons-lang3:3.7',
-        'org.pegdown:pegdown:1.5.0'
+        'org.pegdown:pegdown:1.6.0'
     testCompile('org.spockframework:spock-core:1.1-groovy-2.4') {
         exclude group: 'org.codehaus.groovy', module: 'groovy-all'
         exclude group: 'org.hamcrest', module: 'hamcrest-core'
