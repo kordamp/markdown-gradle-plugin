@@ -1,10 +1,16 @@
-language: groovy
-
+language: java
 script: ./gradlew clean build jacocoTestReport
-
-jdk:
-  - oraclejdk7
-
+jdk: oraclejdk8
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.sonar/cache/
+addons:
+  apt:
+    packages:
+    - oracle-java8-installer
 env: TERM=dumb
-
 after_success: ./gradlew coveralls
