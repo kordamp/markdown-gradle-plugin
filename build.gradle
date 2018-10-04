@@ -60,6 +60,11 @@ javadoc {
     options.links       = ['http://docs.oracle.com/javase/7/docs/api/']
 }
 
+tasks.withType(GroovyCompile) {
+    sourceCompatibility = project.sourceCompatibility
+    targetCompatibility = project.targetCompatibility
+}
+
 task sourcesJar(type: Jar) {
     group 'Build'
     description 'An archive of the source code'
