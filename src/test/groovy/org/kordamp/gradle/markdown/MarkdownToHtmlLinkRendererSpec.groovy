@@ -41,4 +41,22 @@ class MarkdownToHtmlLinkRendererSpec  extends Specification {
         then:
         result.href.equals("test.html")
     }
+
+    def "AutoLinkNode suffix is replaced when an anchor is present"(){
+        when:
+        def renderer = new MarkdownToHtmlLinkRenderer()
+        def result = renderer.render(new AutoLinkNode("test.md#anchor"))
+
+        then:
+        result.href.equals("test.html#anchor")
+    }
+
+    def "AutoLinkNode suffix .mde is not replaced"(){
+        when:
+        def renderer = new MarkdownToHtmlLinkRenderer()
+        def result = renderer.render(new AutoLinkNode("test.mde"))
+
+        then:
+        result.href.equals("test.mde")
+    }
 }
