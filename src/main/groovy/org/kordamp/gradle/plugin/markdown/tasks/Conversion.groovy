@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kordamp.gradle.markdown
+package org.kordamp.gradle.plugin.markdown.tasks
 
 /**
  * @author Andres Almiray

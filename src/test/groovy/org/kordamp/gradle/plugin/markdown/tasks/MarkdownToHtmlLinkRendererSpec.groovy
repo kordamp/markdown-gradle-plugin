@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kordamp.gradle.markdown
+package org.kordamp.gradle.plugin.markdown.tasks
 
 import org.pegdown.ast.AutoLinkNode
 import spock.lang.Specification
@@ -24,9 +24,9 @@ import spock.lang.Specification
  * @author Patrick Reimers
  * @author Markus Schlichting
  */
-class MarkdownToHtmlLinkRendererSpec  extends Specification {
+class MarkdownToHtmlLinkRendererSpec extends Specification {
 
-    def "AutoLinkNode suffix .md is replaced with .html"(){
+    def "AutoLinkNode suffix .md is replaced with .html"() {
         when:
         def renderer = new MarkdownToHtmlLinkRenderer();
         def result = renderer.render(new AutoLinkNode("test.md"))
@@ -35,7 +35,7 @@ class MarkdownToHtmlLinkRendererSpec  extends Specification {
         result.href.equals("test.html")
     }
 
-    def "AutoLinkNode suffix .markdown is replaced with .html"(){
+    def "AutoLinkNode suffix .markdown is replaced with .html"() {
         when:
         def renderer = new MarkdownToHtmlLinkRenderer();
         def result = renderer.render(new AutoLinkNode("test.markdown"))
@@ -44,7 +44,7 @@ class MarkdownToHtmlLinkRendererSpec  extends Specification {
         result.href.equals("test.html")
     }
 
-    def "AutoLinkNode suffix is replaced when an anchor is present"(){
+    def "AutoLinkNode suffix is replaced when an anchor is present"() {
         when:
         def renderer = new MarkdownToHtmlLinkRenderer()
         def result = renderer.render(new AutoLinkNode("test.md#anchor"))
@@ -53,7 +53,7 @@ class MarkdownToHtmlLinkRendererSpec  extends Specification {
         result.href.equals("test.html#anchor")
     }
 
-    def "AutoLinkNode suffix .mde is not replaced"(){
+    def "AutoLinkNode suffix .mde is not replaced"() {
         when:
         def renderer = new MarkdownToHtmlLinkRenderer()
         def result = renderer.render(new AutoLinkNode("test.mde"))

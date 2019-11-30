@@ -15,11 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kordamp.gradle.markdown
+package org.kordamp.gradle.plugin.markdown
 
 import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.kordamp.gradle.plugin.markdown.tasks.HtmlToMarkdownTask
+import org.kordamp.gradle.plugin.markdown.tasks.MarkdownToHtmlTask
 
 /**
  * @author Andres Almiray
@@ -28,6 +30,8 @@ class MarkdownPlugin implements Plugin<Project> {
     private static final String DOCUMENTATION = 'Documentation'
 
     void apply(Project project) {
+        Banner.display(project)
+
         project.tasks.register('markdownToHtml', MarkdownToHtmlTask,
             new Action<MarkdownToHtmlTask>() {
                 @Override
