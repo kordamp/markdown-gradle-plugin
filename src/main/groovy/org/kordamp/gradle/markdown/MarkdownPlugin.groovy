@@ -1,5 +1,7 @@
 /*
- * Copyright 2013-2018 the original author or authors.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2013-2019 Andres Almiray.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +17,7 @@
  */
 package org.kordamp.gradle.markdown
 
+import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -25,14 +28,22 @@ class MarkdownPlugin implements Plugin<Project> {
     private static final String DOCUMENTATION = 'Documentation'
 
     void apply(Project project) {
-        project.task('markdownToHtml',
-            type: MarkdownToHtmlTask,
-            group: DOCUMENTATION,
-            description: 'Converts Markdown sources into HTML')
+        project.tasks.register('markdownToHtml', MarkdownToHtmlTask,
+            new Action<MarkdownToHtmlTask>() {
+                @Override
+                void execute(MarkdownToHtmlTask t) {
+                    t.group = DOCUMENTATION
+                    t.description = 'Converts Markdown sources into HTML'
+                }
+            })
 
-        project.task('htmlToMarkdown',
-            type: HtmlToMarkdownTask,
-            group: DOCUMENTATION,
-            description: 'Converts HTML into Markdown')
+        project.tasks.register('htmlToMarkdown', HtmlToMarkdownTask,
+            new Action<HtmlToMarkdownTask>() {
+                @Override
+                void execute(HtmlToMarkdownTask t) {
+                    t.group = DOCUMENTATION
+                    t.description = 'Converts HTML into Markdown'
+                }
+            })
     }
 }

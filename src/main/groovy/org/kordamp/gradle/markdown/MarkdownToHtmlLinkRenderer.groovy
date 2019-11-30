@@ -1,5 +1,7 @@
 /*
- * Copyright 2013-2018 the original author or authors.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2013-2019 Andres Almiray.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +22,6 @@ import org.pegdown.ast.AutoLinkNode
 import org.pegdown.ast.ExpLinkNode
 import org.pegdown.ast.RefLinkNode
 import org.pegdown.ast.WikiLinkNode
-
-import static org.pegdown.LinkRenderer.Rendering
 
 /**
  * @author Ed MacDonald
@@ -50,9 +50,9 @@ class MarkdownToHtmlLinkRenderer extends LinkRenderer {
     }
 
     // Assumes each extension starts with "."
-    private Rendering adjustHref( Rendering rendering ) {
-        if(conversion.extensions().size() > 0) {
-            def regex =  conversion.extensions().join('|\\')
+    private Rendering adjustHref(Rendering rendering) {
+        if (conversion.extensions().size() > 0) {
+            def regex = conversion.extensions().join('|\\')
             regex = '(\\' + regex + ')(\$|#)'
             def replacement = conversion.targetExtension() + '\$2'
             rendering = new Rendering(rendering.href.replaceFirst(regex, replacement), rendering.text)

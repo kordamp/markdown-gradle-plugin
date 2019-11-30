@@ -1,5 +1,7 @@
 /*
- * Copyright 2013-2018 the original author or authors.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2013-2019 Andres Almiray.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +37,7 @@ class HtmlToMarkdownTask extends DefaultTask {
     @Optional @Input String inputEncoding = StandardCharsets.UTF_8.displayName()
     @Optional @Input String outputEncoding = StandardCharsets.UTF_8.displayName()
 
-    MarkdownWorker worker
+    private MarkdownWorker worker
 
     HtmlToMarkdownTask() {
         sourceDir = project.file('src/html')
@@ -46,9 +48,9 @@ class HtmlToMarkdownTask extends DefaultTask {
     @TaskAction
     void runTask() {
         Map options = [
-            sourceDir: sourceDir,
-            outputDir: outputDir,
-            inputEncoding: inputEncoding,
+            sourceDir     : sourceDir,
+            outputDir     : outputDir,
+            inputEncoding : inputEncoding,
             outputEncoding: outputEncoding
         ]
         worker.process(Conversion.HTML, options, configuration)

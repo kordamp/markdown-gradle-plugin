@@ -1,5 +1,7 @@
 /*
- * Copyright 2013-2018 the original author or authors.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2013-2019 Andres Almiray.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +66,7 @@ class MarkdownProcessor {
         // we have to lock, because pegdown is not thread-safe<
         try {
             processorLock.lock()
-            result = p.markdownToHtml((String) text, new MarkdownToHtmlLinkRenderer() )
+            result = p.markdownToHtml((String) text, new MarkdownToHtmlLinkRenderer())
         } finally {
             processorLock.unlock()
         }
@@ -119,11 +121,11 @@ class MarkdownProcessor {
         PegDownProcessor result
         if (conf) {
             Map opts = getConfigurations(conf)
-            result = new PegDownProcessor((int) opts.pegdownExtensions)
+            result = new PegDownProcessor((int) opts.pegdownExtensions, (long) opts.parsingTimeout)
         } else {
             if (processor == null) {
                 setupConfigurations()
-                processor = new PegDownProcessor(pegdownExtensions)
+                processor = new PegDownProcessor(pegdownExtensions, (long) (conf.parsingTimeout ?: 2000L))
             }
             result = processor
         }
@@ -167,7 +169,11 @@ class MarkdownProcessor {
     // conf can be set via any map-like object
     @SuppressWarnings('Instanceof')
     private static Map getConfigurations(Map conf) {
-        Map result = [remarkOptions: Options.pegdownBase(), pegdownExtensions: 0, baseUri: null]
+        Map result = [
+            remarkOptions    : Options.pegdownBase(),
+            pegdownExtensions: 0,
+            baseUri          : null,
+            parsingTimeout   : conf.parsingTimeout ?: 2000L]
 
         if (conf) {
             def all = conf.all as Boolean
@@ -213,7 +219,7 @@ class MarkdownProcessor {
             }
 
             if (conf.customizePegdown) {
-                def exts = conf.customizeRemark(result.pegdownExtensions)
+                def exts = conf.customizePegdown(result.pegdownExtensions)
                 if (exts instanceof Integer) {
                     result.pegdownExtensions = (int) exts
                 }

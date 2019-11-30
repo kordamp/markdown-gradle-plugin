@@ -1,5 +1,7 @@
 /*
- * Copyright 2013-2018 the original author or authors.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2013-2019 Andres Almiray.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,8 +52,9 @@ class MarkdownToHtmlTask extends DefaultTask {
     @Optional @Input String baseUri
     @Optional @Input Closure customizePegdown
     @Optional @Input Closure customizeRemark
+    @Optional @Input Long parsingTimeout = 2000L
 
-    MarkdownWorker worker
+    private MarkdownWorker worker
 
     MarkdownToHtmlTask() {
         sourceDir = project.file('src/markdown')
@@ -65,7 +68,8 @@ class MarkdownToHtmlTask extends DefaultTask {
             sourceDir     : sourceDir,
             outputDir     : outputDir,
             inputEncoding : inputEncoding,
-            outputEncoding: outputEncoding
+            outputEncoding: outputEncoding,
+            parsingTimeout: parsingTimeout
         ]
         worker.process(Conversion.MARKDOWN, options, mergeConfiguration())
     }

@@ -15,10 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kordamp.gradle.markdown
-/**
- * @author Andres Almiray
- */
-interface MarkdownWorker {
-    void process(Conversion conversion, Map<String, Object> options, Map<String, Object> configuration)
+pluginManagement {
+    repositories {
+        jcenter()
+        gradlePluginPortal()
+    }
+    plugins {
+        id 'org.kordamp.gradle.kordamp-parentpom' version '1.9.1'
+        id 'org.kordamp.gradle.groovy-project'    version kordampVersion
+        id 'org.kordamp.gradle.bintray'           version kordampVersion
+        id 'org.kordamp.gradle.plugin'            version kordampVersion
+    }
 }

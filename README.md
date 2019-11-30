@@ -2,7 +2,6 @@ Markdown Gradle Plugin
 -------------------------
 
 [![Travis Build Status](http://img.shields.io/travis/aalmiray/markdown-gradle-plugin.svg)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
-[![Coverage Status](http://img.shields.io/coveralls/aalmiray/markdown-gradle-plugin.svg)](https://coveralls.io/r/aalmiray/markdown-gradle-plugin)
 [![Bintray](https://api.bintray.com/packages/aalmiray/kordamp/markdown-gradle-plugin/images/download.svg)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin)
 [![Apache License 2](http://img.shields.io/badge/license-ASF2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 [![Patreon](https://img.shields.io/badge/donations-Patreon-orange.svg)](https://www.patreon.com/user?u=6609318)
@@ -27,11 +26,16 @@ Use the following snippet
             maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
         }
         dependencies {
-            classpath 'org.kordamp:markdown-gradle-plugin:1.2.0'
+            classpath 'org.kordamp:markdown-gradle-plugin:2.0.0'
         }
     }
-    apply plugin: 'org.kordamp.markdown.convert'
+    apply plugin: 'org.kordamp.gradle.markdown'
 
+Or alternativelly
+
+    plugins {
+        id 'org.kordamp.gradle.markdown' version '2.0.0'
+    }
 
 Usage
 -----
@@ -46,6 +50,7 @@ three properties as part of their configuration
  * configuration - a Map with further config tweaks. Explained in the next section.
  * inputEncoding - the file encoding used to read all files inside `sourceDir`.
  * outputEncoding - the file encoding used to write all files to `outputDir`.
+ * parsingTimeout - how much time (ms) PegDown should wait whjen processint instructions. Defaults to 2000L
  
 Sources may have any of the following extensions in order to be discovered
 

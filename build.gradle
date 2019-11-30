@@ -1,11 +1,13 @@
 /*
- * Copyright 2013-2018 the original author or authors.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Copyright 2013-2019 Andres Almiray.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,79 +15,66 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 plugins {
-    id 'com.jfrog.bintray' version '1.8.4'
-    id 'com.github.hierynomus.license' version '0.14.0'
-    id 'net.nemerosa.versioning' version '2.7.1'
-    id 'com.github.ben-manes.versions' version '0.20.0'
-    id 'com.gradle.plugin-publish' version '0.10.0'
-    id 'com.github.kt3k.coveralls' version '2.8.2'
-    id 'idea'
+    id 'java-library'
     id 'groovy'
-    id 'maven-publish'
+    id 'org.kordamp.gradle.kordamp-parentpom'
+    id 'org.kordamp.gradle.groovy-project'
+    id 'org.kordamp.gradle.bintray'
+    id 'org.kordamp.gradle.plugin'
 }
 
-apply from: 'gradle/code-coverage.gradle'
-apply from: 'gradle/code-quality.gradle'
-apply from: 'gradle/publish.gradle'
+config {
+    info {
+        name          = rootProject.name
+        description   = 'Markdown/HTML Gradle Plugin'
+        inceptionYear = '2013'
+        tags          = ['markdown']
 
-repositories {
-    jcenter()
+        specification { enabled = false }
+
+        people {
+            person {
+			    id    = 'tednaleid'
+				name  = 'Ted Naleid'
+				roles = ['developer']
+			}
+            person {
+			    id    = 'madmas'
+				name  = 'Markus Schlichting'
+				roles = ['contributor']
+			}
+            person {
+			    id    = 'iruiz'
+				name  = 'Ix-chel Ruiz'
+				roles = ['contributor']
+			}
+        }
+    }
+
+    groovydoc {
+        replaceJavadoc = true
+    }
+
+    plugin {
+        enabled             = true
+        id                  = 'org.kordamp.gradle.markdown'
+        implementationClass = 'org.kordamp.gradle.markdown.MarkdownPlugin'
+    }
+
+    bintray {
+        skipMavenSync = true
+    }
 }
 
 dependencies {
-    compile gradleApi()
-    compile 'com.overzealous:remark:1.1.0',
-        'org.jsoup:jsoup:1.11.3',
-        'org.apache.commons:commons-lang3:3.7',
+    compileOnly gradleApi()
+    api 'com.overzealous:remark:1.1.0',
+        'org.jsoup:jsoup:1.12.1',
+        'org.apache.commons:commons-lang3:3.9',
         'org.pegdown:pegdown:1.6.0'
-    testCompile('org.spockframework:spock-core:1.1-groovy-2.4') {
-        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
-        exclude group: 'org.hamcrest', module: 'hamcrest-core'
-    }
-    testCompile 'cglib:cglib-nodep:3.2.8'
-}
-
-javadoc {
-    excludes = ['**/*.html', 'META-INF/**']
-
-    options.use         = true
-    options.splitIndex  = true
-    options.encoding    = 'UTF-8'
-    options.author      = true
-    options.version     = true
-    options.windowTitle = "$project.name $project.version API"
-    options.docTitle    = "$project.name $project.version API"
-    options.links       = ['http://docs.oracle.com/javase/7/docs/api/']
-}
-
-tasks.withType(GroovyCompile) {
-    sourceCompatibility = project.sourceCompatibility
-    targetCompatibility = project.targetCompatibility
-}
-
-task sourcesJar(type: Jar) {
-    group 'Build'
-    description 'An archive of the source code'
-    classifier 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar) {
-    dependsOn javadoc
-    group 'Build'
-    description 'An archive of the javadoc'
-    classifier 'javadoc'
-    from javadoc.destinationDir
-}
-
-jar.finalizedBy sourcesJar
-jar.finalizedBy javadocJar
-
-artifacts {
-    sourcesJar
-    javadocJar
+    testImplementation 'org.spockframework:spock-core:1.3-groovy-2.5'
+    testImplementation 'cglib:cglib-nodep:3.3.0'
 }
 
 task publishRelease(dependsOn: [bintrayUpload, publishPlugins]) {}
