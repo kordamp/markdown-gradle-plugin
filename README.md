@@ -1,11 +1,10 @@
 Markdown Gradle Plugin
 -------------------------
 
-[![Travis Build Status](http://img.shields.io/travis/aalmiray/markdown-gradle-plugin.svg)](https://travis-ci.org/aalmiray/markdown-gradle-plugin)
-[![Bintray](https://api.bintray.com/packages/aalmiray/kordamp/markdown-gradle-plugin/images/download.svg)](https://bintray.com/aalmiray/kordamp/markdown-gradle-plugin)
+[![Travis Build Status](http://img.shields.io/travis/kordamp/markdown-gradle-plugin.svg)](https://travis-ci.org/kordamp/markdown-gradle-plugin)
+[![Bintray](https://api.bintray.com/packages/kordamp/maven/markdown-gradle-plugin/images/download.svg)](https://bintray.com/kordamp/maven/markdown-gradle-plugin)
 [![Apache License 2](http://img.shields.io/badge/license-ASF2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 [![Patreon](https://img.shields.io/badge/donations-Patreon-orange.svg)](https://www.patreon.com/user?u=6609318)
-
 
 This plugin provides a facility for converting markdown into HTML, as well as
 converting HTML back into markdown. It is based on the [grails-markdown][]
@@ -23,7 +22,8 @@ Use the following snippet
     buildscript {
         repositories {
             jcenter()
-            maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
+            gradlePluginPortal()
+            maven { url 'http://dl.bintray.com/content/kordamp/kordamp' }
         }
         dependencies {
             classpath 'org.kordamp:markdown-gradle-plugin:2.0.0'

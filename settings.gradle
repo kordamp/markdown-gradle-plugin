@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
- * Copyright 2013-2019 Andres Almiray.
+ * Copyright 2013-2020 Andres Almiray.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ pluginManagement {
         gradlePluginPortal()
     }
     plugins {
-				id 'org.kordamp.gradle.kordamp-parentpom' version '1.9.2'
+        id 'org.kordamp.gradle.kordamp-parentpom' version '1.10.0'
         id 'org.kordamp.gradle.groovy-project'    version kordampVersion
         id 'org.kordamp.gradle.bintray'           version kordampVersion
         id 'org.kordamp.gradle.plugin'            version kordampVersion
