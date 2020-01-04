@@ -90,8 +90,6 @@ processResources {
     }
 }
 
-task publishRelease(dependsOn: [bintrayUpload, publishPlugins]) {}
-
 configurations.all {
     resolutionStrategy.force "org.jsoup:jsoup:$jsoupVersion",
         "org.apache.commons:commons-lang3:$commonsLangVersion"
