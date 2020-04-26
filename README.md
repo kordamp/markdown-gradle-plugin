@@ -2,6 +2,7 @@ Markdown Gradle Plugin
 -------------------------
 
 [![Travis Build Status](http://img.shields.io/travis/kordamp/markdown-gradle-plugin.svg)](https://travis-ci.org/kordamp/markdown-gradle-plugin)
+[![GitHub Build Status](image:https://github.com/kordamp/markdown-gradle-plugin/workflows/Build/badge.svg)](https://github.com/kordamp/markdown-gradle-plugin/actions)
 [![Bintray](https://api.bintray.com/packages/kordamp/maven/markdown-gradle-plugin/images/download.svg)](https://bintray.com/kordamp/maven/markdown-gradle-plugin)
 [![Apache License 2](http://img.shields.io/badge/license-ASF2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 [![Patreon](https://img.shields.io/badge/donations-Patreon-orange.svg)](https://www.patreon.com/user?u=6609318)

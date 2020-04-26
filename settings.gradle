@@ -22,9 +22,27 @@ pluginManagement {
         mavenLocal()
     }
     plugins {
-        id 'org.kordamp.gradle.kordamp-parentpom' version kordampPomVersion
-        id 'org.kordamp.gradle.groovy-project'    version kordampPluginVersion
-        id 'org.kordamp.gradle.bintray'           version kordampPluginVersion
-        id 'org.kordamp.gradle.plugin'            version kordampPluginVersion
+        id 'org.kordamp.gradle.groovy-project' version kordampPluginVersion
+        id 'org.kordamp.gradle.bintray'        version kordampPluginVersion
+        id 'org.kordamp.gradle.plugin'         version kordampPluginVersion
+    }
+}
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        jcenter()
+        mavenLocal()
+    }
+    dependencies {
+        classpath "org.kordamp.gradle:kordamp-parentbuild:$kordampBuildVersion"
+    }
+}
+apply plugin: 'org.kordamp.gradle.kordamp-parentbuild'
+
+enforce {
+    rule(enforcer.rules.ForceDependencies) { r ->
+        r.dependencies.addAll "org.jsoup:jsoup:$jsoupVersion",
+        "org.apache.commons:commons-lang3:$commonsLangVersion"
     }
 }
