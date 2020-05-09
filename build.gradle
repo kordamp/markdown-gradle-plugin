@@ -70,10 +70,11 @@ config {
 
 dependencies {
     compileOnly gradleApi()
-    api 'com.overzealous:remark:1.1.0',
-        "org.jsoup:jsoup:$jsoupVersion",
-        "org.apache.commons:commons-lang3:$commonsLangVersion",
-        'org.pegdown:pegdown:1.6.0'
+    api('com.overzealous:remark:1.1.0') { transitive = false }
+    api "org.jsoup:jsoup:$jsoupVersion"
+    api "org.apache.commons:commons-lang3:$commonsLangVersion"
+    api('org.pegdown:pegdown:1.6.0') { transitive = false }
+    api "org.parboiled:parboiled-java:$parboiledVersion"
     testImplementation 'org.spockframework:spock-core:1.3-groovy-2.5'
     testImplementation 'cglib:cglib-nodep:3.3.0'
 }
@@ -87,9 +88,4 @@ processResources {
             'name': 'Markdown Gradle plugin'
         )
     }
-}
-
-configurations.all {
-    resolutionStrategy.force "org.jsoup:jsoup:$jsoupVersion",
-        "org.apache.commons:commons-lang3:$commonsLangVersion"
 }

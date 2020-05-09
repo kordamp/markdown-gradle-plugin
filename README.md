@@ -27,7 +27,7 @@ Use the following snippet
             maven { url 'http://dl.bintray.com/content/kordamp/kordamp' }
         }
         dependencies {
-            classpath 'org.kordamp:markdown-gradle-plugin:2.1.0'
+            classpath 'org.kordamp:markdown-gradle-plugin:2.2.0'
         }
     }
     apply plugin: 'org.kordamp.gradle.markdown'
@@ -35,7 +35,7 @@ Use the following snippet
 Or alternativelly
 
     plugins {
-        id 'org.kordamp.gradle.markdown' version '2.1.0'
+        id 'org.kordamp.gradle.markdown' version '2.2.0'
     }
 
 Usage
