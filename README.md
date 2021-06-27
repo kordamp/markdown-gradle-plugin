@@ -4,8 +4,8 @@ Markdown Gradle Plugin
 [![GitHub Build Status](https://github.com/kordamp/markdown-gradle-plugin/workflows/Build/badge.svg)](https://github.com/kordamp/markdown-gradle-plugin/actions)
 [![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v?label=Plugin%20Portal&metadataUrl=https://plugins.gradle.org/m2/org/kordamp/gradle/markdown/org.kordamp.gradle.markdown.gradle.plugin/maven-metadata.xml)](https://plugins.gradle.org/plugin/org.kordamp.gradle.markdown)
 
-This plugin provides a facility for converting markdown into HTML, as well as
-converting HTML back into markdown. It is based on the [grails-markdown][]
+This plugin provides a facility for converting Markdown into HTML, as well as
+converting HTML back into Markdown. It is based on the [grails-markdown][]
 plugin by Ted Naleid.
 
 See [Daring Fireball][] for syntax basics.
