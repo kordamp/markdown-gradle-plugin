@@ -1,11 +1,8 @@
 Markdown Gradle Plugin
 -------------------------
 
-[![Travis Build Status](http://img.shields.io/travis/kordamp/markdown-gradle-plugin.svg)](https://travis-ci.org/kordamp/markdown-gradle-plugin)
-[![GitHub Build Status](image:https://github.com/kordamp/markdown-gradle-plugin/workflows/Build/badge.svg)](https://github.com/kordamp/markdown-gradle-plugin/actions)
-[![Bintray](https://api.bintray.com/packages/kordamp/maven/markdown-gradle-plugin/images/download.svg)](https://bintray.com/kordamp/maven/markdown-gradle-plugin)
-[![Apache License 2](http://img.shields.io/badge/license-ASF2-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-[![Patreon](https://img.shields.io/badge/donations-Patreon-orange.svg)](https://www.patreon.com/user?u=6609318)
+[![GitHub Build Status](https://github.com/kordamp/markdown-gradle-plugin/workflows/Build/badge.svg)](https://github.com/kordamp/markdown-gradle-plugin/actions)
+[![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v?label=Plugin%20Portal&metadataUrl=https://plugins.gradle.org/m2/org/kordamp/gradle/markdown/org.kordamp.gradle.markdown.gradle.plugin/maven-metadata.xml)](https://plugins.gradle.org/plugin/org.kordamp.gradle.markdown)
 
 This plugin provides a facility for converting markdown into HTML, as well as
 converting HTML back into markdown. It is based on the [grails-markdown][]
@@ -22,9 +19,8 @@ Use the following snippet
 
     buildscript {
         repositories {
-            jcenter()
             gradlePluginPortal()
-            maven { url 'http://dl.bintray.com/content/kordamp/kordamp' }
+            mavenCentral()
         }
         dependencies {
             classpath 'org.kordamp.gradle:markdown-gradle-plugin:2.2.0'
@@ -32,7 +28,7 @@ Use the following snippet
     }
     apply plugin: 'org.kordamp.gradle.markdown'
 
-Or alternativelly
+Or alternatively
 
     plugins {
         id 'org.kordamp.gradle.markdown' version '2.2.0'
@@ -244,10 +240,10 @@ Allows for customization of the Remark `Options` before creating a `Remark` usin
 a closure. This closure will be called at the time the `Remark` is first needed,
 not necessarily at startup.
 
-[grails-markdown]: http://grails.org/plugin/markdown
-[Daring Fireball]: http://daringfireball.net/projects/markdown/basics
-[Pegdown]: http://pegdown.org
-[Remark]: http://remark.overzealous.com/manual/index.html
-[Markdown Extra]: http://michelf.com/projects/php-markdown/extra/
-[Multimarkdown]: http://fletcher.github.com/peg-multimarkdown/#tables
-[Gradle Plugin Portal]: http://plugins.gradle.org/
+[grails-markdown]: https://grails.org/plugin/markdown
+[Daring Fireball]: https://daringfireball.net/projects/markdown/basics
+[Pegdown]: https://pegdown.org
+[Remark]: https://remark.overzealous.com/manual/index.html
+[Markdown Extra]: https://michelf.com/projects/php-markdown/extra/
+[Multimarkdown]: https://fletcher.github.com/peg-multimarkdown/#tables
+[Gradle Plugin Portal]: https://plugins.gradle.org/

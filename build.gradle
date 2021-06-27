@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: Apache-2.0
  *
- * Copyright 2013-2020 Andres Almiray.
+ * Copyright 2013-2021 Andres Almiray.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ plugins {
     id 'java-library'
     id 'groovy'
     id 'org.kordamp.gradle.groovy-project'
-    id 'org.kordamp.gradle.bintray'
     id 'org.kordamp.gradle.plugin'
 }
 
@@ -57,15 +56,17 @@ config {
         }
     }
 
-    plugin {
-        enabled             = true
-        id                  = 'org.kordamp.gradle.markdown'
-        implementationClass = 'org.kordamp.gradle.plugin.markdown.MarkdownPlugin'
+    plugins {
+        plugin {
+            name                = 'markdown'
+            id                  = 'org.kordamp.gradle.markdown'
+            implementationClass = 'org.kordamp.gradle.plugin.markdown.MarkdownPlugin'
+        }
     }
+}
 
-    bintray {
-        skipMavenSync = true
-    }
+repositories {
+    gradlePluginPortal()
 }
 
 dependencies {
