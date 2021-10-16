@@ -31,12 +31,15 @@ project:
 
 release:
   github:
+    branch: master
     username: aalmiray
     overwrite: true
-    branch: master
+    milestone:
+      name: '{{projectVersion}}'
     changelog:
+      sort: DESC
       formatted: ALWAYS
-      change: '- {{commitShortHash}} {{commitTitle}}'
+      format: '- {{commitShortHash}} {{commitTitle}}'
       labelers:
         - label: 'feature'
           title: 'Resolves #'
@@ -49,6 +52,12 @@ release:
           body: 'Relates to #'
         - label: 'task'
           title: '[chore]'
+        - label: 'dependencies'
+          title: '[deps]'
+        - label: 'docs'
+          title: '[docs]'
+        - label: 'build'
+          title: '[build]'
       categories:
         - title: '🚀 Features'
           labels:
@@ -59,11 +68,27 @@ release:
         - title: '🧰 Tasks'
           labels:
             - 'task'
+        - title: '📝 Documentation'
+          labels:
+            - 'docs'
+        - title: '⚙️  Dependencies'
+          labels:
+            - 'dependencies'
+        - title: 'Build'
+          labels:
+            - 'build'
+      hide:
+        categories:
+          - 'Build'
+        contributors:
+          - 'GitHub'
       replacers:
         - search: '\[chore\] '
-          replace: ''
+        - search: '\[deps\] '
+        - search: '\[docs\] '
 
 announce:
   twitter:
     active: release
     status: 🚀 {{projectName}} {{projectVersion}} has been released! {{releaseNotesUrl}}
+    
