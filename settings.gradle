@@ -17,22 +17,21 @@
  */
 pluginManagement {
     repositories {
+        mavenLocal()
         gradlePluginPortal()
         mavenCentral()
-        mavenLocal()
     }
     plugins {
         id 'org.kordamp.gradle.groovy-project' version kordampPluginVersion
-        id 'org.kordamp.gradle.bintray'        version kordampPluginVersion
         id 'org.kordamp.gradle.plugin'         version kordampPluginVersion
     }
 }
 
 buildscript {
     repositories {
+        mavenLocal()
         gradlePluginPortal()
         mavenCentral()
-        mavenLocal()
     }
     dependencies {
         classpath "org.kordamp.gradle:kordamp-parentbuild:$kordampBuildVersion"
